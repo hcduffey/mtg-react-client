@@ -35,10 +35,7 @@ const DeckIndex = (props) => {
     function createDeck(e) {
         e.preventDefault();
         props.updateDecks([...props.decks, {name: e.target["0"].value, id: props.decks.length, cards:[]}]);
-        
-        // Using local storage until backend server is working
-        localStorage.setItem('decks', JSON.stringify([...props.decks, {name: e.target["0"].value, id: props.decks.length, cards:[]}]));
-        
+     
         setIsOpen(false);
     }
 

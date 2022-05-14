@@ -1,9 +1,9 @@
 const CardSearchResults = (props) => {
-    let decks = JSON.parse(localStorage.getItem('decks'));
 
     const addCard = () => {
-        decks[props.deckId].cards.push(props.results.id);
-        localStorage.setItem('decks', JSON.stringify(decks));
+       let updatedDecks = [...props.decks];
+       updatedDecks[props.id].cards.push({id:props.results.id, imageUrl: props.results.imageUrl});
+       props.updateDecks(updatedDecks);     
     }
 
     return(

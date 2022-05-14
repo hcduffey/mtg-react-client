@@ -48,7 +48,7 @@ const DeckDetail = (props) => {
                 <h1>{deck.name}</h1>
                 <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
                 <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
-                <CardSearchResults deckId={id} results={results} />
+                <CardSearchResults id={id} results={results} decks={props.decks} updateDecks={props.updateDecks} />
         </div> 
         : 
         <div>

@@ -5,9 +5,7 @@ import DeckDetail from "./DeckDetail"
 
 const Main = () => {
     //using local storage until backend is up
-    const [decks, updateDecks] = useState(
-        JSON.parse(localStorage.getItem('decks')) || 
-        [{id: 0, name: "Deck 1", cards: []}]);
+    const [decks, updateDecks] = useState([]);
 
     return(
         <main>
