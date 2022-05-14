@@ -1,10 +1,12 @@
 import './App.css';
-import {Outlet} from 'react-router';
+import Nav from './components/Nav';
+import Main from './pages/Main';
 
 function App() {
   return (
     <div className="App">
-      <Outlet />
+      <Nav />
+      <Main />
     </div>
   );
 }

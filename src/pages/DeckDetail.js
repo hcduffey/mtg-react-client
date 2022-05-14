@@ -3,10 +3,11 @@ import { useState } from "react";
 import Axios from 'axios';
 import CardSearch from "../components/CardSearch";
 import CardSearchResults from "../components/CardSearchResults";
+import CardList from "../components/CardList";
 
-const DeckDetail = () => {
+const DeckDetail = (props) => {
     let { id } = useParams()
-    let deck = JSON.parse(localStorage.getItem('decks'))[id];
+    let deck = props.decks[id];
 
     const [cardQuery, updateCardQuery] = useState("");
     const [results, updateResults] = useState(null);
@@ -45,12 +46,14 @@ const DeckDetail = () => {
         results ?
         <div>
                 <h1>{deck.name}</h1>
+                <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
                 <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
                 <CardSearchResults deckId={id} results={results} />
         </div> 
         : 
         <div>
                 <h1>{deck.name}</h1>
+                <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
                 <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
         </div>      
     );
