@@ -46,7 +46,7 @@ const DeckDetail = () => {
         <div>
                 <h1>{deck.name}</h1>
                 <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
-                <CardSearchResults results={results} />
+                <CardSearchResults deckId={id} results={results} />
         </div> 
         : 
         <div>
