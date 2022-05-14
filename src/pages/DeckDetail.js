@@ -16,7 +16,7 @@ const DeckDetail = (props) => {
 
         const options = {
             method: 'GET',
-            url: `https://api.magicthegathering.io/v1/cards?name=${cardQuery}&pageSize=1`,
+            url: `https://api.magicthegathering.io/v1/cards?name=${cardQuery}&pageSize=10`,
             headers: {
               'Accept': 'application/json'
             }
@@ -25,8 +25,7 @@ const DeckDetail = (props) => {
         let response = await Axios.request(options);
         if(response.status === 200) {
             let resultData = await response.data;
-            console.log(resultData);
-            updateResults(resultData.cards[0]);
+            updateResults(resultData.cards.find((card) => card.imageUrl));
         }
         else {
             console.log(response.statusText);

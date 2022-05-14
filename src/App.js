@@ -1,4 +1,5 @@
 import './App.css';
+import 'bulma/css/bulma.min.css';
 import Nav from './components/Nav';
 import Main from './pages/Main';
 
