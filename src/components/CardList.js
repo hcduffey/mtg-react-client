@@ -16,7 +16,7 @@ const CardList = (props) => {
         props.decks[props.id].cards.map((card, idx) => {
             return(
                 <div key={idx}>
-                    <img src={card.imageUrl} alt="card" />
+                    <img className="card-img" src={card.imageUrl} alt="card" />
                     <Button onClick={deleteCard} remove />
                 </div>
             )

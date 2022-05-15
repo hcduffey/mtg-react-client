@@ -8,7 +8,7 @@ const CardSearchResults = (props) => {
 
     return(
         <div>
-            <img src={props.results.imageUrl} alt="card" />
+            <img className="card-img" src={props.results.imageUrl} alt="card" />
             <h3>{props.results.name}</h3>
             <button onClick={addCard}>+</button>
         </div>

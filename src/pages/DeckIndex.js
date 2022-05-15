@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faSave, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal/lib/components/Modal";
-import Button from "../components/Button";
+import { Button } from "react-bulma-components";
+
 import Deck from "../components/Deck";
 
 const customStyles = {
@@ -18,6 +21,7 @@ const DeckIndex = (props) => {
     let subtitle;
     const [modalIsOpen, setIsOpen] = useState(false);
 
+    // MODAL FUNCTIONS
     Modal.setAppElement('#root');
 
     const createClickHandler = () => {
@@ -28,11 +32,13 @@ const DeckIndex = (props) => {
         subtitle.style.color = '#f00';
     }
 
-    function closeModal() {
+    function closeModal(e) {
+        e.preventDefault();
         setIsOpen(false);
     }
 
-    function createDeck(e) {
+    // Deck Functions (Delete Deck is in the Deck component & Edit Deck function are defined in DeckDetail page)
+    const createDeck = (e) => {
         e.preventDefault();
         props.updateDecks([...props.decks, {name: e.target["0"].value, id: props.decks.length, cards:[]}]);
      
@@ -42,12 +48,12 @@ const DeckIndex = (props) => {
     return(
         <div className="Main">
             <h1>My Decks</h1>
-            <Button name="Create" clickHandler={createClickHandler}/>
+            <Button name="Create" onClick={createClickHandler}><FontAwesomeIcon icon={faPlus} /></Button>
             {
                 props.decks.map((deck, idx) => {
                     return(
                         <div key={idx}>
-                            <Deck deck={deck} />
+                            <Deck deck={deck} /> 
                         </div>
                     )
                 })
@@ -64,7 +70,7 @@ const DeckIndex = (props) => {
                 <div>Name of Deck</div>
                 <form onSubmit={createDeck}>
                     <input name="deck-name" />
-                    <button type="submit">Create</button><button onClick={closeModal}>Cancel</button>
+                    <Button type="submit"><FontAwesomeIcon icon={faSave} /></Button><Button onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button>
                 </form>
             </Modal>
         </div>

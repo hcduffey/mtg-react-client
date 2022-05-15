@@ -1,11 +1,10 @@
 import { useParams } from "react-router";
 import { useState } from "react";
 import Axios from 'axios';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import CardSearch from "../components/CardSearch";
 import CardSearchResults from "../components/CardSearchResults";
 import CardList from "../components/CardList";
+import DeckName from "../components/DeckName";
 
 const DeckDetail = (props) => {
     let { id } = useParams()
@@ -46,16 +45,16 @@ const DeckDetail = (props) => {
     return(
         results ?
         <div>
-                <h1>{deck.name} <FontAwesomeIcon icon={faEdit} /></h1>
-                <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
-                <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
-                <CardSearchResults id={id} results={results} decks={props.decks} updateDecks={props.updateDecks} />
+            <DeckName name={deck.name} id={id} decks={props.decks} updateDecks={props.updateDecks} />
+            <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
+            <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
+            <CardSearchResults id={id} results={results} decks={props.decks} updateDecks={props.updateDecks} />
         </div> 
         : 
         <div>
-                <h1>{deck.name} <FontAwesomeIcon icon={faEdit} /></h1>
-                <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
-                <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
+            <DeckName name={deck.name} id={id} decks={props.decks} updateDecks={props.updateDecks} />
+            <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
+            <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
         </div>      
     );
 }
