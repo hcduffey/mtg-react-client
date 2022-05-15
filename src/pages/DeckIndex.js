@@ -45,6 +45,12 @@ const DeckIndex = (props) => {
         setIsOpen(false);
     }
 
+    const deleteDeck = (id) => {
+        let updatedDecks = [...props.decks];
+        //props.updateDecks(props.decks.splice(id,1));
+        props.updateDecks(updatedDecks);
+    }
+
     return(
         <div className="Main">
             <h1>My Decks</h1>
@@ -53,7 +59,7 @@ const DeckIndex = (props) => {
                 props.decks.map((deck, idx) => {
                     return(
                         <div key={idx}>
-                            <Deck deck={deck} /> 
+                            <Deck deck={deck} deleteDeck={deleteDeck} /> 
                         </div>
                     )
                 })
