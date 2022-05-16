@@ -37,10 +37,9 @@ const DeckIndex = (props) => {
         setIsOpen(false);
     }
 
-    // Deck Functions (Delete Deck is in the Deck component & Edit Deck function are defined in DeckDetail page)
-    const createDeck = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        props.updateDecks([...props.decks, {name: e.target["0"].value, id: props.decks.length, cards:[]}]);
+        props.createDeck({name: e.target["0"].value, cards:[]});
      
         setIsOpen(false);
     }
@@ -74,7 +73,7 @@ const DeckIndex = (props) => {
             >
                 <h2 ref={(_subtitle) => (subtitle = _subtitle)}>New Deck</h2>
                 <div>Name of Deck</div>
-                <form onSubmit={createDeck}>
+                <form onSubmit={handleSubmit}>
                     <input name="deck-name" />
                     <Button type="submit"><FontAwesomeIcon icon={faSave} /></Button><Button onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button>
                 </form>

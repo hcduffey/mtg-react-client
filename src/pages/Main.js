@@ -79,8 +79,8 @@ const Main = () => {
     return(
         <main>
             <Routes>
-                <Route index element={<DeckIndex decks={decks} updateDecks={updateDecks} />} />
-                <Route path="/:id" element={<DeckDetail decks={decks} updateDecks={updateDecks} />} />
+                <Route index element={<DeckIndex decks={decks} createDeck={createDeck} deleteDeck={deleteDeck} />} />
+                <Route path="/:id" element={<DeckDetail decks={decks} updateDecks={updateDecks} showDeck={showDeck} />} />
             </Routes>
         </main>
     )
