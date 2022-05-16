@@ -9,12 +9,15 @@ const Main = () => {
     const url = 'https://mtg-deck-backend.herokuapp.com/decks';
 
     const syncDecks = async () => {
-        fetch(url)
-        .then((response) => response.json())
-        .then((result) => {
+        try {
+            let response = await fetch(url);
+            let result = await response.json();
+
             updateDecks(result);
-        })
-        .catch(err => console.log(err));
+        }
+        catch(err) {
+            console.log(err);
+        }
     }
 
     const createDeck = async (deck) => {

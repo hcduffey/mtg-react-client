@@ -1,32 +1,32 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import CardListItem from "./CardListItem";
 
 const CardList = (props) => {
     const id = props.id
     const decks = props.decks;
-    const deck = useRef();
+    const [deckState, updateDeckState] = useState();
 
     useEffect(() => {
 
         if(decks) {
-            deck.current = decks.find((deck) => deck._id === id)
+            updateDeckState(decks.find((deck) => deck._id === id));
         }
 
-    });
+    }, [decks, id]);
 
     const deleteCard = (index) => {
-    
-        deck.current.cards[index].count--;  
-        if(deck.current.cards[index].count === 0) {
-            deck.current.cards.splice(index,1);
+        let deckToDeleteCard = deckState;
+        deckToDeleteCard.cards[index].count--;  
+        if(deckToDeleteCard.cards[index].count === 0) {
+            deckToDeleteCard.cards.splice(index,1);
         }
         
-        props.updateCurrentDeck(deck.current);     
-     }
+        props.updateCurrentDeck(deckToDeleteCard);     
+    }
    
     return(
-        deck.current ?
-        deck.current.cards.map((card, index) => {
+        deckState ?
+        deckState.cards.map((card, index) => {
             return(
                 <CardListItem key={index} card={card} index={index} deleteCard={deleteCard} />
             )
