@@ -17,7 +17,7 @@ const DeckName = (props) => {
                 updateNewDeckName(deck.current.name);
             }
         }
-    });
+    }, [decks, newDeckName, id]);
 
     const handleClick = (e) => {
         e.preventDefault();
