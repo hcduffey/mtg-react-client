@@ -7,9 +7,11 @@ const CardListItem = (props) => {
     }
 
     return(
-        <div key={props.index}>
-            <img className="card-img" src={props.card.imageUrl} alt="card" />
-            <Button onClick={deleteSelf} remove />
+        <div className="deck-container" key={props.index}>
+            <div>
+                <img className="card-img" src={props.card.imageUrl} alt="card" />
+                <Button onClick={deleteSelf} remove />
+            </div>
             <h5>x{props.card.count}</h5>
         </div>
     )

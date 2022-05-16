@@ -28,7 +28,7 @@ const Nav = () => {
                 
         //     </div>
         // </nav> 
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar has-background-light" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
             <Link className="navbar-item" to="/">
                 <img src="/images/logo.png" alt="logo"/>

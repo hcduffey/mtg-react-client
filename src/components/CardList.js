@@ -31,6 +31,7 @@ const CardList = (props) => {
                 <CardListItem key={index} card={card} index={index} deleteCard={deleteCard} />
             )
         })
+      
         :
         <h1>Loading cards...</h1>
     )

@@ -48,15 +48,27 @@ const DeckDetail = (props) => {
         results ?
         <div>
             <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} /> 
-            <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
-            <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
-            <CardSearchResults id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} results={results} />
+            <div className="deck-detail-container">
+                <div className="list-container">
+                    <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
+                </div>
+                <div className="card-search-container">
+                    <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
+                    <CardSearchResults id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} results={results} />
+                </div>
+            </div>
         </div> 
         : 
         <div>
             <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
-            <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
-            <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
+            <div className="deck-detail-container">
+                <div className="list-container">
+                    <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
+                </div>
+                <div className="card-search-container">
+                    <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
+                </div>
+            </div>
         </div>      
     );
     

@@ -56,7 +56,7 @@ const DeckIndex = (props) => {
                 <Button name="Create" onClick={createClickHandler}><FontAwesomeIcon icon={faPlus} /></Button>
                 <Button name="Create" onClick={importClickHandler}><FontAwesomeIcon icon={faFileImport} /></Button>
             </div>
-            <div className="deck-list-container">
+            <div className="list-container">
                 {
                     props.decks.map((deck, idx) => {
                         return(

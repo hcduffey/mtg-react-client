@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSave, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef, useEffect } from 'react';
+import { Button } from "react-bulma-components";
+
 
 const DeckName = (props) => {
     const id = props.id;
@@ -52,9 +54,17 @@ const DeckName = (props) => {
     const loaded = () => {
         return(
             editing ?
-            <h1><form onSubmit={handleSubmit}><input onChange={handleChange} value={newDeckName} /><button type="submit"><FontAwesomeIcon icon={faSave} /></button><button onClick={handleClick}><FontAwesomeIcon icon={faWindowClose} /></button></form></h1>
+            <div className="deck-title-container">    
+                <form className="edit-name-form" onSubmit={handleSubmit}>
+                    <input className="edit-deck-input" onChange={handleChange} value={newDeckName} />
+                    <Button type="submit"><FontAwesomeIcon icon={faSave} /></Button>
+                    <Button onClick={handleClick}><FontAwesomeIcon icon={faWindowClose} /></Button>
+                </form>
+            </div>
             :
-            <h1>{deck.current.name} <button onClick={handleClick}><FontAwesomeIcon icon={faEdit} /></button></h1>
+            <>
+                <span className="page-title">{deck.current.name}</span> <Button onClick={handleClick}><FontAwesomeIcon icon={faEdit} /></Button>
+            </>
         )
     }
 
