@@ -2,18 +2,20 @@ import { Button } from "react-bulma-components";
 
 const CardList = (props) => {
 
+    let currentDeck = props.decks.filter((deck) => deck._id === props.id)[0];
+
+    console.log(currentDeck);
 
     const deleteCard = () => {
-        let updatedDecks = [...props.decks];
-        let deckToUpdateIndex = updatedDecks[props.id].cards.findIndex((card) => {
+        let deckToUpdateIndex = currentDeck.cards.findIndex((card) => {
             return card.id === props.id
         }); 
-        updatedDecks[props.id].cards.splice(deckToUpdateIndex,1);
-        props.updateDecks(updatedDecks);     
+        currentDeck.cards.splice(deckToUpdateIndex,1);
+        props.updateDecks(currentDeck);     
      }
    
     return(
-        props.decks[props.id].cards.map((card, idx) => {
+        currentDeck.cards.map((card, idx) => {
             return(
                 <div key={idx}>
                     <img className="card-img" src={card.imageUrl} alt="card" />

@@ -4,14 +4,14 @@ import { useState } from 'react';
 
 const DeckName = (props) => {
     let [editing, updateEditing] = useState(false);
-    let [newDeckName, updateNewDeckName] = useState(props.decks[props.id].name);
+    let [newDeckName, updateNewDeckName] = useState(props.currentDeck.name);
 
     const handleClick = (e) => {
         e.preventDefault();
         
         if(editing) {
             updateEditing(false);
-            updateNewDeckName(props.decks[props.id].name);
+            updateNewDeckName(props.currentDeck.name);
         }
         else {
             updateEditing(true);
@@ -23,9 +23,8 @@ const DeckName = (props) => {
     }
 
     const handleSubmit = (e) => {
-        let editedDecks = [...props.decks];
-        editedDecks[props.id].name = newDeckName;
-        props.updateDecks(editedDecks);
+        props.updateDeck({...props.deck, name: newDeckName});
+        props.updateCurrentDeck();
         e.preventDefault();
         updateEditing(false);
     }

@@ -3,7 +3,7 @@ import { Button } from "react-bulma-components";
 
 const Deck = (props) => {
     const handleClick = () => {
-        props.deleteDeck(props.deck.id);
+        props.deleteDeck(props.deck._id);
     }
 
     return(

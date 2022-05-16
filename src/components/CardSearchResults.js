@@ -1,9 +1,9 @@
 const CardSearchResults = (props) => {
+    let currentDeck = props.decks.filter((deck) => deck._id === props.id)[0];
 
     const addCard = () => {
-       let updatedDecks = [...props.decks];
-       updatedDecks[props.id].cards.push({id:props.results.id, imageUrl: props.results.imageUrl});
-       props.updateDecks(updatedDecks);     
+       currentDeck.cards.push({id:props.results.id, imageUrl: props.results.imageUrl});
+       props.updateDecks(currentDeck);     
     }
 
     return(

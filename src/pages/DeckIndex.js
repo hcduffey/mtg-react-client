@@ -44,13 +44,8 @@ const DeckIndex = (props) => {
         setIsOpen(false);
     }
 
-    const deleteDeck = (id) => {
-        let updatedDecks = [...props.decks];
-        //props.updateDecks(props.decks.splice(id,1));
-        props.updateDecks(updatedDecks);
-    }
-
     return(
+        props.decks ?
         <div className="Main">
             <h1>My Decks</h1>
             <Button name="Create" onClick={createClickHandler}><FontAwesomeIcon icon={faPlus} /></Button>
@@ -58,12 +53,32 @@ const DeckIndex = (props) => {
                 props.decks.map((deck, idx) => {
                     return(
                         <div key={idx}>
-                            <Deck deck={deck} deleteDeck={deleteDeck} /> 
+                            <Deck deck={deck} deleteDeck={props.deleteDeck} /> 
                         </div>
                     )
                 })
             }
 
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Create Deck Modal"
+            >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>New Deck</h2>
+                <div>Name of Deck</div>
+                <form onSubmit={handleSubmit}>
+                    <input name="deck-name" />
+                    <Button type="submit"><FontAwesomeIcon icon={faSave} /></Button><Button onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button>
+                </form>
+            </Modal>
+        </div>
+        :
+        <div className="Main">
+            <h1>My Decks</h1>
+            <Button name="Create" onClick={createClickHandler}><FontAwesomeIcon icon={faPlus} /></Button>
+            
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
