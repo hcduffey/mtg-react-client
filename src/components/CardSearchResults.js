@@ -1,3 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bulma-components";
+
 const CardSearchResults = (props) => {
     const deck = props.decks.find((deck) => deck._id === props.id);
 
@@ -17,7 +21,7 @@ const CardSearchResults = (props) => {
         <div>
             <img className="card-img" src={props.results.imageUrl} alt="card" />
             <h3>{props.results.name}</h3>
-            <button onClick={addCard}>+</button>
+            <Button onClick={addCard}><FontAwesomeIcon icon={faPlus} /></Button>
         </div>
     );
 }
