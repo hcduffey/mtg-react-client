@@ -1,28 +1,38 @@
-import { Button } from "react-bulma-components";
+import { useEffect, useRef } from "react";
+import CardListItem from "./CardListItem";
 
 const CardList = (props) => {
+    const id = props.id
+    const decks = props.decks;
+    const deck = useRef();
 
-    let currentDeck = props.decks.filter((deck) => deck._id === props.id)[0];
+    useEffect(() => {
 
-    console.log(currentDeck);
+        if(decks) {
+            deck.current = decks.find((deck) => deck._id === id)
+        }
 
-    const deleteCard = () => {
-        let deckToUpdateIndex = currentDeck.cards.findIndex((card) => {
-            return card.id === props.id
-        }); 
-        currentDeck.cards.splice(deckToUpdateIndex,1);
-        props.updateDecks(currentDeck);     
+    });
+
+    const deleteCard = (index) => {
+    
+        deck.current.cards[index].count--;  
+        if(deck.current.cards[index].count === 0) {
+            deck.current.cards.splice(index,1);
+        }
+        
+        props.updateCurrentDeck(deck.current);     
      }
    
     return(
-        currentDeck.cards.map((card, idx) => {
+        deck.current ?
+        deck.current.cards.map((card, index) => {
             return(
-                <div key={idx}>
-                    <img className="card-img" src={card.imageUrl} alt="card" />
-                    <Button onClick={deleteCard} remove />
-                </div>
+                <CardListItem key={index} card={card} index={index} deleteCard={deleteCard} />
             )
         })
+        :
+        <h1>Loading cards...</h1>
     )
 }
 

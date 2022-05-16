@@ -1,9 +1,16 @@
 const CardSearchResults = (props) => {
-    let currentDeck = props.decks.filter((deck) => deck._id === props.id)[0];
+    const deck = props.decks.find((deck) => deck._id === props.id);
 
     const addCard = () => {
-       currentDeck.cards.push({id:props.results.id, imageUrl: props.results.imageUrl});
-       props.updateDecks(currentDeck);     
+        const index = deck.cards.findIndex((card) => card.id === props.results.id)
+
+        if(index !== -1) {
+            deck.cards[index].count++;
+        }
+        else {
+            deck.cards.push({id:props.results.id, imageUrl: props.results.imageUrl, count: 1});
+        }
+        props.updateCurrentDeck(deck);     
     }
 
     return(

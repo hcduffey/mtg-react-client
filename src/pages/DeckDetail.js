@@ -8,12 +8,11 @@ import DeckName from "../components/DeckName";
 
 const DeckDetail = (props) => {
     let {id} = useParams();
-    const [deck, updateDeck] = useState(props.decks.filter((deck) => deck._id === id)[0]);
     const [cardQuery, updateCardQuery] = useState("");
     const [results, updateResults] = useState(null);
 
     const updateCurrentDeck = (editedDeck) => {
-        props.updateDecks(editedDeck, id)
+        props.updateDeck(editedDeck, id)
     }
     
     async function fetch() {
@@ -48,15 +47,15 @@ const DeckDetail = (props) => {
     return(
         results ?
         <div>
-            <DeckName deck={deck} updateCurrentDeck={updateCurrentDeck} /> 
-            <CardList id={id} decks={props.decks} />
+            <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} /> 
+            <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
             <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
-            <CardSearchResults id={id} results={results} decks={props.decks} />
+            <CardSearchResults id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} results={results} />
         </div> 
         : 
         <div>
-            <DeckName deck={deck} updateCurrentDeck={updateCurrentDeck} />
-            <CardList id={id} decks={props.decks} updateDecks={props.updateDecks} />
+            <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
+            <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
             <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
         </div>      
     );

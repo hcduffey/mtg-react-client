@@ -78,7 +78,7 @@ const DeckIndex = (props) => {
         <div className="Main">
             <h1>My Decks</h1>
             <Button name="Create" onClick={createClickHandler}><FontAwesomeIcon icon={faPlus} /></Button>
-            
+            <h1>Loading your decks...</h1>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}

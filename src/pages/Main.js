@@ -29,18 +29,20 @@ const Main = () => {
         syncDecks();
     }
 
-    const updateDeck = (deck, id) => {
-        fetch(url + "/" + id, {
-            method: "put",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(deck)
-        })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err));
-
+    const updateDeck = async (deck, id) => {
+        try {
+            await fetch(url + "/" + id, {
+                method: "put",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(deck)
+            })
+        }
+        catch(err) {
+            console.log(err);
+        }
+    
         syncDecks();
     }
 
@@ -63,7 +65,7 @@ const Main = () => {
         <main>
             <Routes>
                 <Route index element={<DeckIndex decks={decks} createDeck={createDeck} deleteDeck={deleteDeck} />} />
-                <Route path="/:id" element={<DeckDetail decks={decks} updateDecks={updateDecks} />} />
+                <Route path="/:id" element={<DeckDetail decks={decks} updateDeck={updateDeck} />} />
             </Routes>
         </main>
     )
