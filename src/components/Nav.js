@@ -6,28 +6,7 @@ const Nav = () => {
 
     return(
         // https://stackoverflow.com/questions/55015841/burger-menu-using-bulma-on-react-not-working
-        // <nav className="navbar" role="navigation" aria-label="main navigation">
-        //     <div className="navbar-brand">
-        //     <Link className="navbar-item" to="/">
-        //         <img src="/images/logo.png" alt="logo"/>
-        //     </Link>
         
-        //     <a role="button" href="/#" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        //         <span aria-hidden="true"></span>
-        //         <span aria-hidden="true"></span>
-        //         <span aria-hidden="true"></span>
-        //     </a>
-        //     </div>
-        
-        //     <div className="navbar-menu">
-        //     <div className="navbar-start">
-        //         <Link to="/" className="navbar-item">
-        //         Home
-        //         </Link>
-        //     </div>
-                
-        //     </div>
-        // </nav> 
         <nav className="navbar has-background-light" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
             <Link className="navbar-item" to="/">
