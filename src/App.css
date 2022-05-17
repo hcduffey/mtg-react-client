@@ -38,6 +38,15 @@ main {
   font-size: 1.7em;
 }
 
+.import-form {
+  margin-top: 1em;
+}
+
+textarea {
+  height: 210px; 
+  width: 347px;
+}
+
 /* DECK DETAIL STYLES */
 
 .deck-detail-container {
