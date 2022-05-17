@@ -2,7 +2,7 @@ main {
   padding-top: 1em;
 }
 
-.card-img {
+.deck-img, .card-img {
   width: 150px;
   transition: all 0.5s ease;
 }

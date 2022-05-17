@@ -49,8 +49,8 @@ const DeckIndex = (props) => {
         let count = [];
         
         while(inputCardArray[i] !== "" && i < inputCardArray.length) {
-            let cardCount = parseInt(inputCardArray[i].slice(0,1));
-            let cardName = inputCardArray[i].slice(2);
+            let cardCount = parseInt(inputCardArray[i].split(" ")[0]);
+            let cardName = inputCardArray[i].slice(2).trim();
 
             urls.push(`https://api.magicthegathering.io/v1/cards?name=${cardName}&limit=5`);
             count.push({name: cardName, count: cardCount});
@@ -68,25 +68,36 @@ const DeckIndex = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        importCardString(e.target["1"].value); 
+        if(e.target["1"].value === "") {
+            updateCardArray([0]);
+        }
+        else {
+            importCardString(e.target["1"].value);
+        }
+     
         updateNewDeckName(e.target["0"].value);
     }
 
     const generateCardArray = (inputArray, cardCounts) => {
         const retArray = [];
 
-        for(let i=0; i < inputArray.length; i++) {
-            let count = cardCounts.find((cardCount)=> inputArray[i].cards[0].name.includes(cardCount.name));
-            let cardWithImage = inputArray[i].cards.find((card) => card.imageUrl);
-            retArray[i] = {id: inputArray[i].cards[0].id, imageUrl: cardWithImage.imageUrl, count: count.count};
+        if(inputArray[0] === 0) {
+            return retArray;
         }
-
-        return(retArray);
+        else {
+            for(let i=0; i < inputArray.length; i++) {
+                let count = cardCounts.find((cardCount)=> inputArray[i].cards[0].name.includes(cardCount.name));
+                let cardWithImage = inputArray[i].cards.find((card) => card.imageUrl);
+                retArray[i] = {id: inputArray[i].cards[0].id, imageUrl: cardWithImage.imageUrl, count: count.count};
+            }
+    
+            return(retArray);
+        }
     }
 
     useEffect(() => {
         if(newDeckName !== "" && cardArray.length > 0) {
-            let cards = generateCardArray(cardArray, cardCounts);
+            let cards = generateCardArray(cardArray, cardCounts);    
             createDeck({name: newDeckName, cards: cards});
             updateNewDeckName("");
             setIsOpen(false);

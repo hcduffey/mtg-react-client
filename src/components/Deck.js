@@ -8,7 +8,7 @@ const Deck = (props) => {
 
     return(
         <>
-            <img className="card-img" src="/images/deck.png" alt="deck" /><Button onClick={handleClick} remove />
+            <img className="deck-img" src="/images/deck.png" alt="deck" /><Button onClick={handleClick} remove />
             <h3><Link to={`/${props.deck._id}`}>{props.deck.name}</Link></h3>
         </>
     );
