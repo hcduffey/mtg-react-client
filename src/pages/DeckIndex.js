@@ -50,6 +50,13 @@ const DeckIndex = (props) => {
         
         while(inputCardArray[i] !== "" && i < inputCardArray.length) {
             let cardCount = parseInt(inputCardArray[i].split(" ")[0]);
+
+            if(isNaN(cardCount)) {
+                console.log("Bad data provided in import");
+                updateCardArray([]);
+                return;
+            }
+
             let cardName = inputCardArray[i].slice(2).trim();
 
             urls.push(`https://api.magicthegathering.io/v1/cards?name=${cardName}&limit=5`);
@@ -63,7 +70,7 @@ const DeckIndex = (props) => {
             Promise.all(responses.map(res => res.json()))
         ).then(data => {
             updateCardArray([...data]);
-        });
+        }).catch(err => console.log(err));
     }
 
     const handleSubmit = (e) => {

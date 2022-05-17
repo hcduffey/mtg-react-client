@@ -6,8 +6,11 @@ import DeckDetail from "./DeckDetail"
 const Main = () => {
     //using local storage until backend is up
     const [decks, updateDecks] = useState(null);
-    const url = 'https://mtg-deck-backend.herokuapp.com/decks';
+    const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
 
+    /**
+     * 
+     */
     const syncDecks = async () => {
         try {
             let response = await fetch(url);
