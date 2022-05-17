@@ -2,18 +2,55 @@
 import { useParams } from "react-router";
 import { useState } from "react";
 import Axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFileExport, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bulma-components";
+import Modal from "react-modal/lib/components/Modal";
 import CardSearch from "../components/CardSearch";
 import CardSearchResults from "../components/CardSearchResults";
 import CardList from "../components/CardList";
 import DeckName from "../components/DeckName";
 
+// style used to pass to the modal function provided by react-modal
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+};
+
 const DeckDetail = (props) => {
+    let subtitle; // used for the modal
+    const [modalIsOpen, setIsOpen] = useState(false); // used to determine whether to display the modal
     let {id} = useParams();
+    const decks = props.decks;
     const [cardQuery, updateCardQuery] = useState("");
     const [results, updateResults] = useState(null);
+    const [exportText, updateExportText] = useState("");
 
     const updateCurrentDeck = (editedDeck) => {
         props.updateDeck(editedDeck, id)
+    }
+
+    // MODAL FUNCTIONS
+    Modal.setAppElement('#root');
+
+    const exportClickHandler = () => {
+        updateExportText(generateExport());
+        setIsOpen(true);
+    }
+
+    function afterOpenModal() {
+        subtitle.style.color = '#f00';
+    }
+
+    function closeModal(e) {
+        e.preventDefault();
+        setIsOpen(false);
     }
     
     /**
@@ -50,10 +87,23 @@ const DeckDetail = (props) => {
         fetch();
     }
 
+    const generateExport = () => {
+        let retString = "Deck\n";
+
+        let cardArray = [...decks.find((deck) => deck._id === id).cards];
+
+        for(let i=0; i<cardArray.length; i++) {
+            retString += cardArray[i].count + " " + cardArray[i].name + "\n";
+        }
+        return(retString);
+    }
+
     return(
         results ?
         <div>
-            <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} /> 
+            <div className="deck-title-container">
+                <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} /><Button name="export-button" onClick={exportClickHandler}><FontAwesomeIcon icon={faFileExport} /></Button> 
+            </div>
             <div className="deck-detail-container">
                 <div className="list-container">
                     <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
@@ -63,10 +113,24 @@ const DeckDetail = (props) => {
                     <CardSearchResults id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} results={results} />
                 </div>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Export Deck Modal"
+            >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Export Deck</h2>
+                <div>(copy/paste)</div>
+                <textarea name="deck-export" defaultValue={exportText} /> <br />
+                <Button onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button> 
+            </Modal>
         </div> 
         : 
         <div>
-            <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
+            <div className="deck-title-container">
+                <DeckName id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} /><Button name="export-button" onClick={exportClickHandler}><FontAwesomeIcon icon={faFileExport} /></Button>
+            </div>
             <div className="deck-detail-container">
                 <div className="list-container">
                     <CardList id={id} decks={props.decks} updateCurrentDeck={updateCurrentDeck} />
@@ -75,6 +139,18 @@ const DeckDetail = (props) => {
                     <CardSearch cardQuery={cardQuery} handleSubmit={handleSubmit} handleChange={handleChange} />
                 </div>
             </div>
+            <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Export Deck Modal"
+            >
+                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Export Deck</h2>
+                <div>(copy/paste)</div>
+                <textarea name="deck-export" defaultValue={exportText} /> <br />
+                <Button onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button> 
+            </Modal>
         </div>      
     );
     

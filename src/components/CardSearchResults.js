@@ -12,7 +12,7 @@ const CardSearchResults = (props) => {
             deck.cards[index].count++;
         }
         else {
-            deck.cards.push({id:props.results.id, imageUrl: props.results.imageUrl, count: 1});
+            deck.cards.push({id:props.results.id, name: props.results.name, imageUrl: props.results.imageUrl, count: 1});
         }
         props.updateCurrentDeck(deck);     
     }

@@ -1,5 +1,4 @@
 // DeckIndex will display a list of all the decks
-
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSave, faWindowClose } from "@fortawesome/free-solid-svg-icons";
@@ -111,7 +110,7 @@ const DeckIndex = (props) => {
             for(let i=0; i < inputArray.length; i++) {
                 let count = cardCounts.find((cardCount)=> inputArray[i].cards[0].name.includes(cardCount.name));
                 let cardWithImage = inputArray[i].cards.find((card) => card.imageUrl);
-                retArray[i] = {id: inputArray[i].cards[0].id, imageUrl: cardWithImage.imageUrl, count: count.count};
+                retArray[i] = {id: inputArray[i].cards[0].id, name: inputArray[i].cards[0].name, imageUrl: cardWithImage.imageUrl, count: count.count};
             }
     
             return(retArray);
