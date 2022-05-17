@@ -1,3 +1,4 @@
+// Shows the details of a deck (a visual view of its cards and name) - enables user to add/remove cards and change the name
 import { useParams } from "react-router";
 import { useState } from "react";
 import Axios from 'axios';
@@ -15,6 +16,11 @@ const DeckDetail = (props) => {
         props.updateDeck(editedDeck, id)
     }
     
+    /**
+     * Used to get card information from the mtg API for each card in the current deck.
+     *
+     * @return {string} none
+     */
     async function fetch() {
 
         const options = {

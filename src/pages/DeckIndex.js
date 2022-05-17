@@ -1,3 +1,5 @@
+// DeckIndex will display a list of all the decks
+
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSave, faWindowClose } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +8,7 @@ import { Button } from "react-bulma-components";
 
 import Deck from "../components/Deck";
 
+// style used to pass to the modal function provided by react-modal
 const customStyles = {
     content: {
       top: '50%',
@@ -18,12 +21,12 @@ const customStyles = {
   };
 
 const DeckIndex = (props) => {
-    let subtitle;
-    const [modalIsOpen, setIsOpen] = useState(false);
-    const [cardArray, updateCardArray] = useState([]);
-    const [newDeckName, updateNewDeckName] = useState("");
-    const [cardCounts, updateCardCounts] = useState([]);
-    const {createDeck} = props;
+    let subtitle; // used for the modal
+    const [modalIsOpen, setIsOpen] = useState(false); // used to determine whether to display the modal
+    const [cardArray, updateCardArray] = useState([]); // used in creating a new deck, card array will either be empty or contain imported cards when creating the deck
+    const [newDeckName, updateNewDeckName] = useState(""); // used to create a new deck
+    const [cardCounts, updateCardCounts] = useState([]); // used in importing cards, will hold the number/count of each card being imported
+    const {createDeck} = props; // create deck function passed in
 
     // MODAL FUNCTIONS
     Modal.setAppElement('#root');
@@ -42,6 +45,12 @@ const DeckIndex = (props) => {
         setIsOpen(false);
     }
 
+    /**
+     * Parses the text provided in the create deck modal textarea, and updates the cardArray and cardCountArray states.
+     *
+     * @param {string} cardString - the raw text entered into the textarea for importing cards
+     * @return none
+     */
     const importCardString = (cardString) => {
         let inputCardArray = cardString.split("\n");
         let i = 1;
@@ -85,6 +94,13 @@ const DeckIndex = (props) => {
         updateNewDeckName(e.target["0"].value);
     }
 
+    /**
+     * Takes the array containing the card count, and the one containing id/imageUrl for the card and combines them into a single array that card be passed to the new Deck.
+     *
+     * @param {Array} inputArray - Array that contains the imported cards Id and imageUrl (and other fields if we need to use them sometime)
+     * @param {Array} cardCounts - Array that contains the count of each imported card
+     * @return {Array} the consolidated array
+     */
     const generateCardArray = (inputArray, cardCounts) => {
         const retArray = [];
 

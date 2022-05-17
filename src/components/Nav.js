@@ -1,3 +1,4 @@
+// The Nav bar at the top of the screen - most of this code is driven by what is required in the Bulma React implementation of their NavBar
 import { Link } from "react-router-dom";
 import { useState } from "react";
 

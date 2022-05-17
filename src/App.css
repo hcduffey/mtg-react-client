@@ -15,6 +15,7 @@ main {
 .list-container {
   display: flex;
   flex-wrap: wrap;
+  min-width: 470px;
 }
 
 /* DECK INDEX STYLES */
@@ -56,6 +57,7 @@ textarea {
 
 .deck-detail-container {
   display: flex;
+  justify-content: space-between;
   flex-wrap: nowrap;
 }
 
