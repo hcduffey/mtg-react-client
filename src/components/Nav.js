@@ -8,6 +8,7 @@ const Nav = (props) => {
 
     const handleLogOut = () => {
       sessionStorage.clear();
+      setisActive(!isActive);
       updateLoginSuccess(false);
     }
 
@@ -40,8 +41,8 @@ const Nav = (props) => {
           className={`navbar-menu ${isActive ? "is-active" : ""}`}
         >
           <div className="navbar-start">
-            <Link to="/" className="navbar-item">Home</Link>
-            <Link to="/decks" className="navbar-item">Decks</Link>
+            <Link onClick={() => { setisActive(!isActive); }} to="/" className="navbar-item">Home</Link>
+            <Link to="/decks" onClick={() => { setisActive(!isActive); }} className="navbar-item">Decks</Link>
             {loginSuccess && <Link onClick={handleLogOut} to="/" className="navbar-item">Logout</Link>}
           </div>
         </div>

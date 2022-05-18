@@ -8,8 +8,11 @@ const Main = (props) => {
     //using local storage until backend is up
     const [decks, updateDecks] = useState(null);
     const {loginSuccess, updateLoginSuccess} = props;
-    const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
-    // const url = 'http://localhost:4000/decks';
+    const [accountSuccess, updateAccountSuccess] = useState(false);
+    const [usernameTaken, updateUsernameTaken] = useState(false);
+
+    // const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
+    const url = 'http://localhost:4000/decks';
     const token = sessionStorage.getItem('token');
     
     /**
@@ -114,7 +117,7 @@ const Main = (props) => {
     return(
         <main>
             <Routes>
-                <Route index element={<Home loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
+                <Route index element={<Home loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} accountSuccess={accountSuccess} updateAccountSuccess={updateAccountSuccess} usernameTaken={usernameTaken} updateUsernameTaken={updateUsernameTaken} />} />
                 <Route path="/decks" element={<DeckIndex decks={decks} createDeck={createDeck} deleteDeck={deleteDeck} loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
                 <Route path="/decks/:id" element={<DeckDetail decks={decks} updateDeck={updateDeck} loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
             </Routes>
