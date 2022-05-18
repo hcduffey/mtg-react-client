@@ -11,8 +11,8 @@ const Main = (props) => {
     const [accountSuccess, updateAccountSuccess] = useState(false);
     const [usernameTaken, updateUsernameTaken] = useState(false);
 
-    // const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
-    const url = 'http://localhost:4000/decks';
+    const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
+    // const url = 'http://localhost:4000/decks';
     const token = sessionStorage.getItem('token');
     
     /**

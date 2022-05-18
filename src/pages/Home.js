@@ -43,8 +43,8 @@ const Home = (props) => {
     }
 
     const submitCredentials = (credentials) => {
-        // const url = 'https://mtg-deck-backend.herokuapp.com/auth';
-        const url = 'http://localhost:4000/auth';
+        const url = 'https://mtg-deck-backend.herokuapp.com/auth';
+        // const url = 'http://localhost:4000/auth';
         fetch(url, {
             method: 'post',
             headers: {
@@ -88,8 +88,8 @@ const Home = (props) => {
     }
 
     const createAccount = (credentials) => {
-        // const url = 'https://mtg-deck-backend.herokuapp.com/auth/signup';
-        const url = 'http://localhost:4000/auth/signup';
+        const url = 'https://mtg-deck-backend.herokuapp.com/auth/signup';
+        // const url = 'http://localhost:4000/auth/signup';
         fetch(url, {
             method: 'post',
             headers: {
