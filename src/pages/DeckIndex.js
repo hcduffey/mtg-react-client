@@ -124,11 +124,6 @@ const DeckIndex = (props) => {
     }
 
     useEffect(() => {
-        // login success is set only when the user first logs in to update state and cause a re-render of the components
-        if(loginSuccess) {
-            updateLoginSuccess(false);
-        }
-
         if(!token) {
             navigate("/", {state: {needLogin: true}});
         }

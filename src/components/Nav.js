@@ -2,8 +2,14 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-const Nav = () => {
+const Nav = (props) => {
     const [isActive, setisActive] = useState(false);
+    const {loginSuccess, updateLoginSuccess} = props;
+
+    const handleLogOut = () => {
+      sessionStorage.clear();
+      updateLoginSuccess(false);
+    }
 
     return(
         // https://stackoverflow.com/questions/55015841/burger-menu-using-bulma-on-react-not-working
@@ -36,6 +42,7 @@ const Nav = () => {
           <div className="navbar-start">
             <Link to="/" className="navbar-item">Home</Link>
             <Link to="/decks" className="navbar-item">Decks</Link>
+            {loginSuccess && <Link onClick={handleLogOut} to="/" className="navbar-item">Logout</Link>}
           </div>
         </div>
      </nav>

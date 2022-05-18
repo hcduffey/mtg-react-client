@@ -6,7 +6,8 @@ const CardSearchResults = (props) => {
     const deck = props.decks.find((deck) => deck._id === props.id);
 
     const addCard = () => {
-        const index = deck.cards.findIndex((card) => card.id === props.results.id)
+        // const index = deck.cards.findIndex((card) => card.id === props.results.id)
+        const index = deck.cards.findIndex((card) => card.name === props.results.name)
 
         if(index !== -1) {
             deck.cards[index].count++;
@@ -14,6 +15,7 @@ const CardSearchResults = (props) => {
         else {
             deck.cards.push({id:props.results.id, name: props.results.name, imageUrl: props.results.imageUrl, count: 1});
         }
+
         props.updateCurrentDeck(deck);     
     }
 

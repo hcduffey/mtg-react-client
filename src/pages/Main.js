@@ -4,10 +4,10 @@ import DeckIndex from "./DeckIndex"
 import DeckDetail from "./DeckDetail"
 import Home from "./Home"
 
-const Main = () => {
+const Main = (props) => {
     //using local storage until backend is up
     const [decks, updateDecks] = useState(null);
-    const [loginSuccess, updateLoginSuccess] = useState(false);
+    const {loginSuccess, updateLoginSuccess} = props;
     const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
     // const url = 'http://localhost:4000/decks';
     const token = sessionStorage.getItem('token');
