@@ -1,5 +1,6 @@
 // DeckIndex will display a list of all the decks
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faSave, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal/lib/components/Modal";
@@ -20,6 +21,11 @@ const customStyles = {
   };
 
 const DeckIndex = (props) => {
+    let navigate = useNavigate();
+    let token = sessionStorage.getItem('token');
+    let username = sessionStorage.getItem('user');
+    const { loginSuccess, updateLoginSuccess } = props;
+    
     let subtitle; // used for the modal
     const [modalIsOpen, setIsOpen] = useState(false); // used to determine whether to display the modal
     const [cardArray, updateCardArray] = useState([]); // used in creating a new deck, card array will either be empty or contain imported cards when creating the deck
@@ -118,19 +124,32 @@ const DeckIndex = (props) => {
     }
 
     useEffect(() => {
+        // login success is set only when the user first logs in to update state and cause a re-render of the components
+        if(loginSuccess) {
+            updateLoginSuccess(false);
+        }
+
+        if(!token) {
+            navigate("/", {state: {needLogin: true}});
+        }
+
         if(newDeckName !== "" && cardArray.length > 0) {
             let cards = generateCardArray(cardArray, cardCounts);    
             createDeck({name: newDeckName, cards: cards});
             updateNewDeckName("");
             setIsOpen(false);
         }
-    }, [cardArray, createDeck, newDeckName, cardCounts])
+    }, [loginSuccess, updateLoginSuccess, cardArray, createDeck, newDeckName, cardCounts, navigate, token])
+
+    if(!token) {
+        navigate("/", {state: {needLogin: true}});
+    }
 
     return(
         props.decks ?
         <div className="Main">
             <div className="deck-title-container">
-                <span className="page-title">My Decks</span>
+                <span className="page-title">{username}&apos;s Decks</span>
                 <Button name="Create" onClick={createClickHandler}><FontAwesomeIcon icon={faPlus} /></Button>
             </div>
             <div className="list-container">

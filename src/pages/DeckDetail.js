@@ -1,5 +1,5 @@
 // Shows the details of a deck (a visual view of its cards and name) - enables user to add/remove cards and change the name
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useState } from "react";
 import Axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,6 +24,9 @@ const customStyles = {
 };
 
 const DeckDetail = (props) => {
+    let navigate = useNavigate();
+    let token = sessionStorage.getItem('token');
+
     let subtitle; // used for the modal
     const [modalIsOpen, setIsOpen] = useState(false); // used to determine whether to display the modal
     let {id} = useParams();
@@ -96,6 +99,10 @@ const DeckDetail = (props) => {
             retString += cardArray[i].count + " " + cardArray[i].name + "\n";
         }
         return(retString);
+    }
+
+    if(!token) {
+        navigate("/", {state: {needLogin: true}});
     }
 
     return(

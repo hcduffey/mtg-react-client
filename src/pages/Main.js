@@ -2,20 +2,29 @@ import { Routes, Route } from "react-router"
 import { useState, useEffect } from "react"
 import DeckIndex from "./DeckIndex"
 import DeckDetail from "./DeckDetail"
+import Home from "./Home"
 
 const Main = () => {
     //using local storage until backend is up
     const [decks, updateDecks] = useState(null);
+    const [loginSuccess, updateLoginSuccess] = useState(false);
     const url = 'https://mtg-deck-backend.herokuapp.com/decks'; // the URL for my API deployed on heroku
-
+    // const url = 'http://localhost:4000/decks';
+    const token = sessionStorage.getItem('token');
     
     /**
      * Fetches all of the Decks from the database to update/sync local state.
      *
      */
     const syncDecks = async () => {
+        if(!token) { return }
+        
         try {
-            let response = await fetch(url);
+            let response = await fetch(url, {
+                headers: {
+                    'x-access-token': token
+                }
+            });
             let result = await response.json();
 
             updateDecks(result);
@@ -32,10 +41,13 @@ const Main = () => {
      * @return none
      */
     const createDeck = async (deck) => {
+        if(!token) { return }
+
         await fetch(url, {
             method: "post",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-access-token': token
             },
             body: JSON.stringify(deck)
         });
@@ -51,11 +63,14 @@ const Main = () => {
      * @return none
      */
     const updateDeck = async (deck, id) => {
+        if(!token) { return }
+
         try {
             await fetch(url + "/" + id, {
                 method: "put",
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
                 },
                 body: JSON.stringify(deck)
             })
@@ -74,10 +89,13 @@ const Main = () => {
      * @return none
      */
     const deleteDeck = async (id) => {
+        if(!token) { return }
+
         await fetch(url + "/" + id, {
             method: "delete",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-access-token': token
             }
         });
 
@@ -85,17 +103,20 @@ const Main = () => {
     }
 
     /**
-     * We want to call useEffect once upon load to get the initial state of the decks from the database.
+     * We want to call useEffect if user has logged in but haven't their decks yet
      */
     useEffect(() => {
-        syncDecks();
-    }, []);
+        if(token && !decks) {
+            syncDecks();
+        }
+    });
 
     return(
         <main>
             <Routes>
-                <Route index element={<DeckIndex decks={decks} createDeck={createDeck} deleteDeck={deleteDeck} />} />
-                <Route path="/:id" element={<DeckDetail decks={decks} updateDeck={updateDeck} />} />
+                <Route index element={<Home loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
+                <Route path="/decks" element={<DeckIndex decks={decks} createDeck={createDeck} deleteDeck={deleteDeck} loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
+                <Route path="/decks/:id" element={<DeckDetail decks={decks} updateDeck={updateDeck} loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
             </Routes>
         </main>
     )

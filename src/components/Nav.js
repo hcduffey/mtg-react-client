@@ -35,6 +35,7 @@ const Nav = () => {
         >
           <div className="navbar-start">
             <Link to="/" className="navbar-item">Home</Link>
+            <Link to="/decks" className="navbar-item">Decks</Link>
           </div>
         </div>
      </nav>
