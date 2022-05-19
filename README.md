@@ -106,7 +106,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-The client requires the [https://github.com/hcduffey/mtg-api](MTG Backend API) to work.
+The client requires the [https://github.com/hcduffey/mtg-api](MTGAPI) to work.
 
 ### Installation
 
