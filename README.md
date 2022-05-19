@@ -94,6 +94,7 @@ MTG: Deckbuilder is a single-page application that interacts with an RESTful API
 * [https://reactjs.org/](ReactJS)
 * [https://fontawesome.com/v5/docs/web/use-with/react](FontAwesome)
 * [https://react-bulma.dev/en](Bulma)
+* [https://magicthegathering.io/](MTGAPI)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
