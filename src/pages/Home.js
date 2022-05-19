@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal/lib/components/Modal";
-import { Button } from "react-bulma-components";
+import { Button, Heading } from "react-bulma-components";
 
 // style used to pass to the modal function provided by react-modal
 const customStyles = {
@@ -20,10 +20,11 @@ const customStyles = {
 const Home = (props) => {
     let token = sessionStorage.getItem('token');
     const [loginError, setLoginError] = useState(false);
-    const { state } = useLocation();
+    let { state } = useLocation();
     const {accountSuccess, updateAccountSuccess, usernameTaken, updateUsernameTaken} = props;
     let subtitle; // used for the modal
     const [modalIsOpen, setIsOpen] = useState(false); // used to determine whether to display the modal
+    let message = ""; // used to display bad login, new account created, etc messages
 
     // MODAL FUNCTIONS
     Modal.setAppElement('#root');
@@ -42,6 +43,10 @@ const Home = (props) => {
         setIsOpen(false);
     }
 
+    /**
+     * Performs the fetch to authenticate a user with the provided username/password
+     * @param {*} credentials 
+     */
     const submitCredentials = (credentials) => {
         const url = 'https://mtg-deck-backend.herokuapp.com/auth';
         // const url = 'http://localhost:4000/auth';
@@ -77,6 +82,10 @@ const Home = (props) => {
         });
     }
 
+    /**
+     * Handles the login, makes a call to submitCredentials function using the provided username/password in the form.
+     * @param {*} e event from the form
+     */
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -87,6 +96,10 @@ const Home = (props) => {
         submitCredentials({username: username, password: password});
     }
 
+    /**
+     * Actually performs the fetch to create an account based on the provided username, password
+     * @param {*} credentials 
+     */
     const createAccount = (credentials) => {
         const url = 'https://mtg-deck-backend.herokuapp.com/auth/signup';
         // const url = 'http://localhost:4000/auth/signup';
@@ -113,6 +126,10 @@ const Home = (props) => {
         });
     }
 
+    /**
+     * Submits the provided username/password to the /auth/signup api to create an account
+     * @param {*} e event passed from the form
+     */
     const handleAccountCreate = (e) => {
         e.preventDefault();
 
@@ -123,27 +140,41 @@ const Home = (props) => {
 
     }
 
+    useEffect(() => {
+        if(message !== "") {
+            setLoginError(false);
+            state.needLogin = false;
+            updateAccountSuccess(false);
+        }
+    }, [message, state, updateAccountSuccess])
+
     if(!token) {
-        let message = "";
         if(loginError) {
             message = "Incorrect username or password"
         }
+        // TODO: These below message do not display when they're supposed to
         else if(state) {
-            message = "Login or sign-up to view decks!"
+            if(state.needLogin) {
+                message = "Login or sign-up to view decks!"
+            }
         }
         else if(accountSuccess) {
             message = "Account created, login to continue"
         }
 
         return(
-            <div>
-                <h1>Login</h1> 
-                <h2>{message}</h2>
-                <form onSubmit={handleSubmit} >
-                    User ID:  <input name="userid" /> <br />
-                    Password: <input name="password" type="password" /> <br />
-                    <Button>Login</Button><Button name="Create" onClick={signUpClickHandler}>Sign-Up</Button>
-                </form>
+            <div className="home-container">
+                <div className="login-container">
+                    <Heading>Login</Heading> 
+                    <h2>{message}</h2>
+                    <form onSubmit={handleSubmit} >
+                        <label htmlFor="userid">Username</label>
+                        <input className="login-input" name="userid" /> <br />
+                        <label htmlFor="userid">Password</label>
+                        <input className="login-input" name="password" type="password" /> <br />
+                        <Button>Login</Button><Button name="Create" onClick={signUpClickHandler}>Sign-Up</Button>
+                    </form>
+                </div>
                 <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -152,12 +183,12 @@ const Home = (props) => {
                 contentLabel="Sign-Up Modal"
             >
                 <h2 ref={(_subtitle) => (subtitle = _subtitle)}>New Account</h2>
-                <div>Sign-Up</div>
+                <div><Heading>Sign-Up</Heading></div>
                 {usernameTaken && <div>Username is already in use, choose another</div>}
                 <form onSubmit={handleAccountCreate}>
-                    Username: <input name="username" /><br />
-                    Password: <input name="password" type="password" /> <br />
-                    <Button type="submit">Create</Button><Button onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button>
+                    Username<input className="login-input" name="username" /><br />
+                    Password<input className="login-input" name="password" type="password" /> <br />
+                    <Button className="login-btn" type="submit">Create</Button><Button className="login-btn" onClick={closeModal}><FontAwesomeIcon icon={faWindowClose} /></Button>
                 </form>
             </Modal>
             </div>
@@ -165,9 +196,8 @@ const Home = (props) => {
     }
 
     return(
-        <div>
-            <h1>Home Page</h1>
-            <h3>Welcome, {sessionStorage.getItem('user')}!</h3>
+        <div className="home-container">
+            <Heading className="welcome-title">Welcome to Deckbuilder {sessionStorage.getItem('user')}!</Heading>
         </div>
     );
 }

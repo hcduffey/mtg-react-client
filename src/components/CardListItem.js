@@ -1,3 +1,6 @@
+/**
+ * Displays the card image and quantity of that card in the deck detail page for a deck
+ */
 import { Button } from "react-bulma-components";
 
 const CardListItem = (props) => {

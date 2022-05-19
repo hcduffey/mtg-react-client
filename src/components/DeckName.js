@@ -1,3 +1,7 @@
+/**
+ * Provides the name of the deck, and the ability to edit the name of the deck. Used in the DeckDetail page.
+ */
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSave, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { useState, useRef, useEffect } from 'react';

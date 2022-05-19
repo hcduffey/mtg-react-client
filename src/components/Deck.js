@@ -1,3 +1,6 @@
+/**
+ * Used in Deck index, returns a deck image, the name, and link to that decks detail
+ */
 import { Link } from "react-router-dom";
 import { Button } from "react-bulma-components";
 

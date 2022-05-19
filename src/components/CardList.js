@@ -1,3 +1,6 @@
+/**
+ * Uses CardListItem to display all of the cards in a deck, also provides the delete deck function
+ */
 import { useEffect, useState } from "react";
 import CardListItem from "./CardListItem";
 

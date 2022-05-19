@@ -1,3 +1,6 @@
+/**
+ * Displays the results of the card search and a button to allow the user to add that card to their deck
+ */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "react-bulma-components";

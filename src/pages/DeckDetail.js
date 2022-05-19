@@ -58,8 +58,6 @@ const DeckDetail = (props) => {
     
     /**
      * Used to get card information from the mtg API for each card in the current deck.
-     *
-     * @return {string} none
      */
     async function fetch() {
 
@@ -81,10 +79,18 @@ const DeckDetail = (props) => {
         }
     }
 
+    /**
+     * Used to update state for the card search component when the input field changes
+     * @param {*} e event from the onChange in the input field
+     */
     const handleChange = (e) => {
         updateCardQuery(e.target.value);
     }
 
+    /**
+     * Calls the fetch function to search the MTG API for a card based on the provided 
+     * @param {*} e event from the form submission
+     */
     const handleSubmit = (e) => {
         e.preventDefault();
         fetch();
