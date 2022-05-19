@@ -1,6 +1,5 @@
-main {
-  /* padding-top: 1em; */
-}
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+
 input {
   font-size: 1.5em;
 }
@@ -33,6 +32,7 @@ nav {
 }
 
 .welcome-title {
+  font-family: 'Macondo', cursive;
   text-align: center;
   background-color: white;
   font-size: 2em;
