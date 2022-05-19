@@ -37,7 +37,7 @@
 <h3 align="center">MTG: Deckbuilder</h3>
 
   <p align="center">
-    A API-based SPA that provides users with the ability to create, import, export and manage Magic: The Gathering decks using the MTG API.
+    An API-driven SPA that provides users with the ability to create, import, export and manage Magic: The Gathering decks using the MTG API.
     <br />
     <a href="https://github.com/hcduffey/mtg-react-client"><strong>Explore the code »</strong></a>
     <br />
