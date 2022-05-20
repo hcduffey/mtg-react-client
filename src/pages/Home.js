@@ -117,7 +117,6 @@ const Home = (props) => {
             }
             else {
                 updateUsernameTaken(false);
-                updateAccountSuccess(true);
                 setIsOpen(false);
             }
         })
