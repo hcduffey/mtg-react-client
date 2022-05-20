@@ -21,7 +21,7 @@ const Home = (props) => {
     let token = sessionStorage.getItem('token');
     const [loginError, setLoginError] = useState(false);
     let { state } = useLocation();
-    const {accountSuccess, updateAccountSuccess, usernameTaken, updateUsernameTaken} = props;
+    const {syncDecks, accountSuccess, updateAccountSuccess, usernameTaken, updateUsernameTaken, loginSuccess} = props;
     let subtitle; // used for the modal
     const [modalIsOpen, setIsOpen] = useState(false); // used to determine whether to display the modal
     let message = ""; // used to display bad login, new account created, etc messages
@@ -146,7 +146,11 @@ const Home = (props) => {
             state.needLogin = false;
             updateAccountSuccess(false);
         }
-    }, [message, state, updateAccountSuccess])
+
+        if(loginSuccess) {
+            syncDecks();
+        }
+    }, [message, state, updateAccountSuccess, loginSuccess, syncDecks])
 
     if(!token) {
         if(loginError) {

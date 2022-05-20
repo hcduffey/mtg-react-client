@@ -5,7 +5,7 @@ import Main from './pages/Main';
 import {useState} from 'react';
 
 function App() {
-  const [loginSuccess, updateLoginSuccess] = useState(false);
+  const [loginSuccess, updateLoginSuccess] = useState(sessionStorage.getItem('token'));
   return (
     <div className="App">
       <Nav loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />

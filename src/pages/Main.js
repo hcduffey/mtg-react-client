@@ -117,7 +117,7 @@ const Main = (props) => {
     return(
         <main>
             <Routes>
-                <Route index element={<Home loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} accountSuccess={accountSuccess} updateAccountSuccess={updateAccountSuccess} usernameTaken={usernameTaken} updateUsernameTaken={updateUsernameTaken} />} />
+                <Route index element={<Home loginSuccess={loginSuccess} syncDecks={syncDecks} updateLoginSuccess={updateLoginSuccess} accountSuccess={accountSuccess} updateAccountSuccess={updateAccountSuccess} usernameTaken={usernameTaken} updateUsernameTaken={updateUsernameTaken} />} />
                 <Route path="/decks" element={<DeckIndex decks={decks} createDeck={createDeck} deleteDeck={deleteDeck} loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
                 <Route path="/decks/:id" element={<DeckDetail decks={decks} updateDeck={updateDeck} loginSuccess={loginSuccess} updateLoginSuccess={updateLoginSuccess} />} />
             </Routes>
