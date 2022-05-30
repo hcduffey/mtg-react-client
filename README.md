@@ -29,6 +29,12 @@
 
 <!-- PROJECT LOGO -->
 <br />
+
+<div align="center">
+  <a href="https://github.com/hcduffey/mtg-react-client">
+    <img src="public/images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
 <div align="center">
   
 <h3 align="center">MTG: Deckbuilder</h3>
