@@ -168,7 +168,7 @@ const Home = (props) => {
         return(
             <div className="home-container">
                 <div className="login-container">
-                    <Heading>Login</Heading> 
+                    <Heading>Deckbuilder Login</Heading> 
                     <h2>{message}</h2>
                     <form onSubmit={handleSubmit} >
                         <label htmlFor="userid">Username</label>
